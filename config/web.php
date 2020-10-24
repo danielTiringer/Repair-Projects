@@ -5,15 +5,24 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+	'name' => 'Repair Projects',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-	'language' => 'hu-HU',
-	'sourceLanguage' => 'en-US',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+	'language' => 'hu-HU',
+	'sourceLanguage' => 'en-US',
+	'bootstrap' => ['languagepicker'],
     'components' => [
+		'languagepicker' => [
+			'class' => 'lajax\languagepicker\Component',
+			'languages' => [
+				'en-US' => 'English',
+				'hu-HU' => 'Magyar'
+			],
+		],
 		'i18n' => [
 			'translations' => [
 				'app*' => [
@@ -22,7 +31,10 @@ $config = [
 						'app' => 'app.php',
 						'app/error' => 'error.php',
 					],
-					'on missingTranslation' => ['app\components\TranslationEventHandler', 'handleMissingTranslation'],
+					'on missingTranslation' => [
+						'app\components\TranslationEventHandler',
+						'handleMissingTranslation',
+					],
 				],
 			],
 		],
