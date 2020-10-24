@@ -9,9 +9,8 @@ $this->title = 'Repair Projects';
     <div class="jumbotron">
 	<h1><?= Yii::t('app', 'Welcome') ?></h1>
 
-		<p class="lead"><?= Yii::$app->formatter->asDate(time(), 'long') ?></p>
+		<p class="lead"><?= Yii::t('app', 'Today\'s date is ') . Yii::$app->formatter->asDate(time(), 'long') ?></p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">

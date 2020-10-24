@@ -19,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'id' => 'registration-form',
         'layout' => 'horizontal',
         'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
+            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-7\">{error}</div>",
+            'labelOptions' => ['class' => 'col-lg-2 control-label'],
         ],
     ]); ?>
 
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'password_repeat')->passwordInput() ?>
 
         <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
+            <div class="col-lg-offset-2 col-lg-10">
                 <?= Html::submitButton(Yii::t('app', 'Register'), ['class' => 'btn btn-primary', 'name' => 'register-button']) ?>
             </div>
         </div>

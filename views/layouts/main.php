@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use lajax\languagepicker\widgets\LanguagePicker;
 
 AppAsset::register($this);
 ?>
@@ -38,11 +39,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'About'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app', 'Contact'), 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -54,7 +55,7 @@ AppAsset::register($this);
                 . '</li>'
             ),
             Yii::$app->user->isGuest ? (
-                ['label' => 'Register', 'url' => ['/site/register']]
+                ['label' => Yii::t('app', 'Register'), 'url' => ['/site/register']]
 			) : ''
         ],
     ]);
@@ -72,9 +73,14 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Repair Projects <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+		<div class="pull-right">
+			<?= LanguagePicker::widget([
+				'skin' => LanguagePicker::SKIN_BUTTON,
+				'size' => LanguagePicker::SIZE_SMALL
+			]); ?>
+		</div>
     </div>
 </footer>
 
