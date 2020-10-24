@@ -22,6 +22,19 @@ class RegistrationForm extends Model
 		];
 	}
 
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' => Yii::t('app', 'Username'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password'),
+            'password_repeat' => Yii::t('app', 'Password Repeat'),
+        ];
+    }
+
 	/**
 	 * @return bool
 	 */

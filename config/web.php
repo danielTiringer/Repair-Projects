@@ -7,11 +7,25 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'language' => 'hu-HU',
+	'sourceLanguage' => 'en-US',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+		'i18n' => [
+			'translations' => [
+				'app*' => [
+					'class' => 'yii\i18n\PhpMessageSource',
+					'fileMap' => [
+						'app' => 'app.php',
+						'app/error' => 'error.php',
+					],
+					'on missingTranslation' => ['app\components\TranslationEventHandler', 'handleMissingTranslation'],
+				],
+			],
+		],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'cBGjJdMjZcN67GqShLLFfqPh6J51U3k9',
