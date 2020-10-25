@@ -53,12 +53,8 @@ class Status extends ActiveRecord
 	 */
 	public function getDescriptions()
 	{
-		$statuses = (new Query())
-			->select(['id', 'status_description'])
-			->from($this->tableName())
-			->all();
 		return array_column(
-			$statuses,
+			$this->find()->all(),
 			'status_description',
 			'id'
 		);
