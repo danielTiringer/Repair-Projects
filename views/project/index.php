@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'make',
             'model',
             'description:ntext',
-            'year',
+			[
+				'attribute' => 'year',
+				'filter' => (range(date('Y'), 2000)),
+			],
             [
                 'class' => 'yii\grid\DataColumn',
                 'attribute' => 'source',
