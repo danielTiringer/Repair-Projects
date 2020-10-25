@@ -30,8 +30,8 @@ class Status extends ActiveRecord
     public function rules()
     {
         return [
-            [['description'], 'required'],
-            [['description'], 'string', 'max' => 255],
+            [['status_description'], 'required'],
+            [['status_description'], 'string', 'max' => 255],
         ];
     }
 
@@ -42,7 +42,7 @@ class Status extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'description' => Yii::t('app', 'Description'),
+            'status_description' => Yii::t('app', 'Description'),
         ];
     }
 
@@ -54,14 +54,14 @@ class Status extends ActiveRecord
 	public function getDescriptions()
 	{
 		$statuses = (new Query())
-			->select('status_description')
+			->select(['id', 'status_description'])
 			->from($this->tableName())
 			->all();
-		$pairedStatuses = [];
-		foreach ($statuses as $key => $status) {
-			$pairedStatuses[$key + 1] = Yii::t('app', $status['status_description']);
-		}
-		return $pairedStatuses;
+		return array_column(
+			$statuses,
+			'status_description',
+			'id'
+		);
 	}
 
     /**
