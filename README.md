@@ -96,6 +96,7 @@ Run the installation triggers (creating cookie validation code)
 If there are access problems:
 
 	sudo chown -R www-data:www-data web/assets
+	sudo chown -R www-data:www-data runtime
 
 Start the container
 
