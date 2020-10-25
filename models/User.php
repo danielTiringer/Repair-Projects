@@ -15,6 +15,11 @@ use yii\web\IdentityInterface;
  * @property string $password
  * @property string $auth_key
  * @property string $access_token
+ *
+ * @property Component[] $components
+ * @property Component[] $components0
+ * @property Project[] $projects
+ * @property Project[] $projects0*
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -124,5 +129,45 @@ class User extends ActiveRecord implements IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
+    }
+
+    /**
+     * Gets query for [[Components]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComponents()
+    {
+        return $this->hasMany(Component::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Components0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComponents0()
+    {
+        return $this->hasMany(Component::className(), ['updated_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Projects]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjects()
+    {
+        return $this->hasMany(Project::className(), ['created_by' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Projects0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProjects0()
+    {
+        return $this->hasMany(Project::className(), ['updated_by' => 'id']);
     }
 }

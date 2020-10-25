@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Project;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Project */
@@ -38,9 +40,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'source',
             'status',
-            'created_by',
+			[
+				'attribute' => 'created_by',
+				'value' => (new User())->findIdentity($model['created_by'])['username'],
+			],
             'created_at:datetime',
-            'updated_by',
+			[
+				'attribute' => 'updated_by',
+				'value' => (new User())->findIdentity($model['updated_by'])['username'],
+			],
             'updated_at:datetime',
         ],
     ]) ?>

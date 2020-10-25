@@ -48,4 +48,5 @@ return [
 	'Created At' => 'Létrehozás dátuma',
 	'Updated By' => 'Frissítő',
 	'Updated At' => 'Frissítés dátuma',
+	'Are you sure you want to delete this item?' => 'Biztosan törli ezt az elemet?',
 ];

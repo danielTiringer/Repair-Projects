@@ -18,7 +18,7 @@ use yii\db\ActiveRecord;
  * @property string|null $code
  * @property string|null $description
  * @property int $price
- * @property string $source
+ * @property int|null $source
  * @property int|null $status
  * @property int|null $created_by
  * @property int|null $created_at
@@ -26,7 +26,8 @@ use yii\db\ActiveRecord;
  * @property int|null $updated_at
  *
  * @property User $createdBy
- * @property Status $status
+ * @property Source $source0
+ * @property Status $status0
  * @property User $updatedBy
  * @property ProjectComponents[] $projectComponents
  */
@@ -55,10 +56,10 @@ class Project extends ActiveRecord
     {
         return [
             [['make', 'model', 'year', 'price', 'source'], 'required'],
-            [['year', 'price', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['year', 'price', 'source', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['description'], 'string'],
             [['make', 'code'], 'string', 'max' => 50],
-            [['model', 'source'], 'string', 'max' => 255],
+            [['model'], 'string', 'max' => 255],
 			[
 				['status'],
 				'exist',
@@ -105,12 +106,22 @@ class Project extends ActiveRecord
         ];
     }
 
+   /**
+    * Gets query for [[Source0]].
+    *
+    * @return ActiveQuery
+    */
+   public function getSource0()
+   {
+       return $this->hasOne(Source::className(), ['id' => 'source']);
+   }
+
 	/**
-	* Gets query for [[Status]].
+	* Gets query for [[Status0]].
 	*
 	* @return ActiveQuery
 	*/
-	public function getStatus()
+	public function getStatus0()
 	{
 	   return $this->hasOne(Status::className(), ['id' => 'status']);
 	}
