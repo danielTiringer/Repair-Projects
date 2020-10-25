@@ -53,11 +53,13 @@ class Status extends ActiveRecord
 	 */
 	public function getDescriptions()
 	{
-		return array_column(
+		return array_map(function($status) {
+			return Yii::t('app', $status);
+		}, array_column(
 			$this->find()->all(),
 			'status_description',
 			'id'
-		);
+		));
 	}
 
     /**
