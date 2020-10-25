@@ -3,6 +3,7 @@
 use Yii;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use app\models\Source;
 use app\models\Status;
 
 /* @var $this yii\web\View */
@@ -27,7 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'model',
             'description:ntext',
             'year',
-            'source',
+            [
+                'class' => 'yii\grid\DataColumn',
+                'attribute' => 'source',
+                'format' => 'text',
+                'filter' => (new Source())->getDescriptions(),
+                'label' => Yii::t('app', 'Source'),
+                'value' => function($model) {
+                    $source = Source::find()->where(['id' => $model->source])->one();
+                    return $source['source_description'];
+                }
+            ],
             [
                 'class' => 'yii\grid\DataColumn',
                 'attribute' => 'status',
