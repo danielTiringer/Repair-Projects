@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Source;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Project */
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'year')->textInput() ?>
+    <?= $form->field($model, 'year')->dropDownList(range(date('Y'), 2000)) ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
@@ -24,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'source')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'source')->dropDownList((new Source())->getDescriptions()) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
