@@ -19,12 +19,14 @@ use yii\db\ActiveRecord;
  * @property string|null $description
  * @property int $price
  * @property string $source
+ * @property int|null $status
  * @property int|null $created_by
  * @property int|null $created_at
  * @property int|null $updated_by
  * @property int|null $updated_at
  *
  * @property User $createdBy
+ * @property Status $status
  * @property User $updatedBy
  * @property ProjectComponents[] $projectComponents
  */
@@ -53,12 +55,31 @@ class Project extends ActiveRecord
     {
         return [
             [['make', 'model', 'year', 'price', 'source'], 'required'],
-            [['year', 'price', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['year', 'price', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['description'], 'string'],
             [['make', 'code'], 'string', 'max' => 50],
             [['model', 'source'], 'string', 'max' => 255],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
+			[
+				['status'],
+				'exist',
+				'skipOnError' => true,
+				'targetClass' => Status::className(),
+				'targetAttribute' => ['status' => 'id']
+			],
+			[
+				['created_by'],
+				'exist',
+				'skipOnError' => true,
+				'targetClass' => User::className(),
+				'targetAttribute' => ['created_by' => 'id']
+			],
+			[
+				['updated_by'],
+				'exist',
+				'skipOnError' => true,
+				'targetClass' => User::className(),
+				'targetAttribute' => ['updated_by' => 'id']
+			],
         ];
     }
 
@@ -76,12 +97,23 @@ class Project extends ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'source' => Yii::t('app', 'Source'),
+			'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
+
+	/**
+	* Gets query for [[Status]].
+	*
+	* @return ActiveQuery
+	*/
+	public function getStatus()
+	{
+	   return $this->hasOne(Status::className(), ['id' => 'status']);
+	}
 
     /**
      * Gets query for [[CreatedBy]].

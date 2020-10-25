@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Project;
@@ -17,8 +18,8 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['id', 'year', 'price', 'created_by', 'updated_by'], 'integer'],
-            [['make', 'model', 'code', 'description', 'source', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'year', 'price', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['make', 'model', 'code', 'description', 'source'], 'safe'],
         ];
     }
 
@@ -40,7 +41,23 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-        $query = Project::find();
+		$query = Project::find()
+			->select([
+				'project.id',
+				'make',
+				'model',
+				'code',
+				'description',
+				'source',
+				'status',
+				'year',
+				'price',
+				'created_by',
+				'created_at',
+				'updated_by',
+				'updated_at',
+			])
+			->joinWith('status');
 
         // add conditions that should always apply here
 
@@ -61,6 +78,7 @@ class ProjectSearch extends Project
             'id' => $this->id,
             'year' => $this->year,
             'price' => $this->price,
+            /* 'status' => $this->status, */
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
@@ -71,7 +89,8 @@ class ProjectSearch extends Project
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'code', $this->code])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'source', $this->source]);
+            ->andFilterWhere(['like', 'source', $this->source])
+            ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
