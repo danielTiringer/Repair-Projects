@@ -17,7 +17,7 @@ use app\models\Source;
 
     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'year')->dropDownList(range(date('Y'), 2000)) ?>
+    <?= $form->field($model, 'year')->textInput(['maxlength' => 4]) ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 
