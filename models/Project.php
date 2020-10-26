@@ -55,32 +55,15 @@ class Project extends ActiveRecord
     public function rules()
     {
         return [
-            [['make', 'model', 'year', 'price', 'source'], 'required'],
+            [['make', 'model', 'year', 'price'], 'required'],
             [['year', 'price', 'source', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['description'], 'string'],
             [['make', 'code'], 'string', 'max' => 50],
             [['model'], 'string', 'max' => 255],
-			[
-				['status'],
-				'exist',
-				'skipOnError' => true,
-				'targetClass' => Status::className(),
-				'targetAttribute' => ['status' => 'id']
-			],
-			[
-				['created_by'],
-				'exist',
-				'skipOnError' => true,
-				'targetClass' => User::className(),
-				'targetAttribute' => ['created_by' => 'id']
-			],
-			[
-				['updated_by'],
-				'exist',
-				'skipOnError' => true,
-				'targetClass' => User::className(),
-				'targetAttribute' => ['updated_by' => 'id']
-			],
+			[['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
+			[['source'], 'exist', 'skipOnError' => true, 'targetClass' => Source::className(), 'targetAttribute' => ['source' => 'id']],
+			[['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status' => 'id']],
+			[['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -117,11 +100,11 @@ class Project extends ActiveRecord
    }
 
 	/**
-	* Gets query for [[Status0]].
+	* Gets query for [[Status]].
 	*
 	* @return ActiveQuery
 	*/
-	public function getStatus0()
+	public function getStatus()
 	{
 	   return $this->hasOne(Status::className(), ['id' => 'status']);
 	}

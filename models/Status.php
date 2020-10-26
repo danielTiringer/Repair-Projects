@@ -10,7 +10,7 @@ use yii\db\Query;
  * This is the model class for table "status".
  *
  * @property int $id
- * @property string description
+ * @property string $status_description
  *
  * @property Project[] $projects
  */
