@@ -18,8 +18,8 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['id', 'year', 'price', 'status', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
-            [['make', 'model', 'code', 'description', 'source'], 'safe'],
+            [['id', 'year', 'price', 'status', 'source', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
+            [['make', 'model', 'code', 'description'], 'safe'],
         ];
     }
 
@@ -41,23 +41,7 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-		$query = Project::find()
-			->select([
-				'project.id',
-				'make',
-				'model',
-				'code',
-				'description',
-				'source',
-				'status',
-				'year',
-				'price',
-				'created_by',
-				'created_at',
-				'updated_by',
-				'updated_at',
-			])
-			->joinWith('status');
+        $query = Project::find();
 
         // add conditions that should always apply here
 
@@ -78,7 +62,8 @@ class ProjectSearch extends Project
             'id' => $this->id,
             'year' => $this->year,
             'price' => $this->price,
-            /* 'status' => $this->status, */
+            'status' => $this->status,
+            'source' => $this->source,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
@@ -88,9 +73,7 @@ class ProjectSearch extends Project
         $query->andFilterWhere(['like', 'make', $this->make])
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'status', $this->status])
-            ->andFilterWhere(['like', 'source', $this->source]);
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

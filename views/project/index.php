@@ -27,10 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'make',
             'model',
             'description:ntext',
-			[
-				'attribute' => 'year',
-				'filter' => (range(date('Y'), 2000)),
-			],
+            [
+                'attribute' => 'year',
+                'filter' => (range(date('Y'), 2000)),
+            ],
             [
                 'class' => 'yii\grid\DataColumn',
                 'attribute' => 'source',
@@ -38,8 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => (new Source())->getDescriptions(),
                 'label' => Yii::t('app', 'Source'),
                 'value' => function($model) {
-                    $source = Source::find()->where(['id' => $model->source])->one();
-                    return $source['source_description'];
+                    return $model->source0->source_description;
                 }
             ],
             [
@@ -49,8 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => (new Status())->getDescriptions(),
                 'label' => Yii::t('app', 'Status'),
                 'value' => function($model) {
-                    $status = Status::find()->where(['id' => $model->status])->one();
-                    return Yii::t('app', $status['status_description']);
+                    return $model->status0->status_description;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn'],

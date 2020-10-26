@@ -41,13 +41,13 @@ class Project extends ActiveRecord
         return 'project';
     }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::class,
-			BlameableBehavior::class,
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+            BlameableBehavior::class,
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -60,10 +60,10 @@ class Project extends ActiveRecord
             [['description'], 'string'],
             [['make', 'code'], 'string', 'max' => 50],
             [['model'], 'string', 'max' => 255],
-			[['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-			[['source'], 'exist', 'skipOnError' => true, 'targetClass' => Source::className(), 'targetAttribute' => ['source' => 'id']],
-			[['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status' => 'id']],
-			[['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Source::className(), 'targetAttribute' => ['source' => 'id']],
+            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -81,7 +81,7 @@ class Project extends ActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'source' => Yii::t('app', 'Source'),
-			'status' => Yii::t('app', 'Status'),
+            'status' => Yii::t('app', 'Status'),
             'created_by' => Yii::t('app', 'Created By'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),
@@ -99,15 +99,15 @@ class Project extends ActiveRecord
        return $this->hasOne(Source::className(), ['id' => 'source']);
    }
 
-	/**
-	* Gets query for [[Status]].
-	*
-	* @return ActiveQuery
-	*/
-	public function getStatus()
-	{
-	   return $this->hasOne(Status::className(), ['id' => 'status']);
-	}
+    /**
+    * Gets query for [[Status0]].
+    *
+    * @return ActiveQuery
+    */
+    public function getStatus0()
+    {
+    return $this->hasOne(Status::className(), ['id' => 'status']);
+    }
 
     /**
      * Gets query for [[CreatedBy]].

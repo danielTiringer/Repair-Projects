@@ -38,17 +38,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'code',
             'description:ntext',
             'price',
-            'source',
-            'status',
-			[
-				'attribute' => 'created_by',
-				'value' => (new User())->findIdentity($model['created_by'])['username'],
-			],
+            [
+                'attribute' => 'source',
+                'value' => $model->source0->source_description,
+            ],
+            [
+                'attribute' => 'status',
+                'value' => $model->status0->status_description,
+            ],
+            [
+                'attribute' => 'created_by',
+                'value' => $model->createdBy->username,
+            ],
             'created_at:datetime',
-			[
-				'attribute' => 'updated_by',
-				'value' => (new User())->findIdentity($model['updated_by'])['username'],
-			],
+            [
+                'attribute' => 'updated_by',
+                'value' => $model->createdBy->username,
+            ],
             'updated_at:datetime',
         ],
     ]) ?>

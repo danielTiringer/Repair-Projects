@@ -45,19 +45,19 @@ class Source extends ActiveRecord
         ];
     }
 
-	/**
-	 * Returns the status_description of every entry in the database
-	 *
-	 * @return array
-	 */
-	public function getDescriptions()
-	{
-		return array_column(
-			$this->find()->all(),
-			'source_description',
-			'id'
-		);
-	}
+    /**
+    * Returns the status_description of every entry in the database
+    *
+    * @return array
+    */
+    public function getDescriptions()
+    {
+        return array_column(
+            $this->find()->all(),
+            'source_description',
+            'id'
+        );
+    }
 
 
     /**
