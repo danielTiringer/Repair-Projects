@@ -7,78 +7,78 @@ use yii\db\Migration;
  */
 class m201025_092009_create_source_table extends Migration
 {
-	const TABLE_NAME = 'source';
+    const TABLE_NAME = 'source';
 
-	const COLUMN_NAME = 'source_description';
+    const COLUMN_NAME = 'source_description';
 
-	const LINKED_COLUMN = [
-		'tableName' => 'project',
-		'columnName' => 'source',
-	];
+    const LINKED_COLUMN = [
+        'tableName' => 'project',
+        'columnName' => 'source',
+    ];
 
-	const SOURCES = [
-		'Ebay',
-		'Facebook',
-		'Jofogas',
-		'Vatera',
-		'Other',
-	];
+    const SOURCES = [
+        'Ebay',
+        'Facebook',
+        'Jofogas',
+        'Vatera',
+        'Other',
+    ];
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function safeUp()
     {
-		$this->createTable(
-			self::TABLE_NAME,
-			[
-				'id' => $this->primaryKey()->unsigned(),
-				self::COLUMN_NAME => $this->string(255)->notNull(),
-			],
-		);
+        $this->createTable(
+            self::TABLE_NAME,
+            [
+                'id' => $this->primaryKey()->unsigned(),
+                self::COLUMN_NAME => $this->string(255)->notNull(),
+            ],
+        );
 
-		foreach (self::SOURCES as $source) {
-			$this->insert(
-				self::TABLE_NAME,
-				[self::COLUMN_NAME => $source]
-			);
-		}
+        foreach (self::SOURCES as $source) {
+            $this->insert(
+                self::TABLE_NAME,
+                [self::COLUMN_NAME => $source]
+            );
+        }
 
-		$this->alterColumn(
-			self::LINKED_COLUMN['tableName'],
-			self::LINKED_COLUMN['columnName'],
-			$this->integer(11)->unsigned()
-		);
+        $this->alterColumn(
+            self::LINKED_COLUMN['tableName'],
+            self::LINKED_COLUMN['columnName'],
+            $this->integer(11)->unsigned()
+        );
 
-		$this->addForeignKey(
-			'fk_' . self::LINKED_COLUMN['tableName'] . '_' . self::LINKED_COLUMN['columnName'],
-			self::LINKED_COLUMN['tableName'],
-			self::LINKED_COLUMN['columnName'],
-			self::TABLE_NAME,
-			'id',
-			'NO ACTION',
-			'NO ACTION'
-		);
+        $this->addForeignKey(
+            'fk_' . self::LINKED_COLUMN['tableName'] . '_' . self::LINKED_COLUMN['columnName'],
+            self::LINKED_COLUMN['tableName'],
+            self::LINKED_COLUMN['columnName'],
+            self::TABLE_NAME,
+            'id',
+            'NO ACTION',
+            'NO ACTION'
+        );
     }
 
     /**
-     * {@inheritdoc}
-     */
+    * {@inheritdoc}
+    */
     public function safeDown()
     {
-		$this->dropForeignKey(
-			'fk_' . self::LINKED_COLUMN['tableName'] . '_' . self::LINKED_COLUMN['columnName'],
-			self::LINKED_COLUMN['tableName'],
-		);
+        $this->dropForeignKey(
+            'fk_' . self::LINKED_COLUMN['tableName'] . '_' . self::LINKED_COLUMN['columnName'],
+            self::LINKED_COLUMN['tableName'],
+        );
 
-		$this->dropColumn(
-			self::LINKED_COLUMN['tableName'],
-			self::LINKED_COLUMN['columnName']
-		);
+        $this->dropColumn(
+            self::LINKED_COLUMN['tableName'],
+            self::LINKED_COLUMN['columnName']
+        );
 
-		$this->dropTable(
-			self::TABLE_NAME
-		);
-	}
+        $this->dropTable(
+            self::TABLE_NAME
+        );
+    }
 
 }
