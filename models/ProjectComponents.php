@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
@@ -63,7 +64,7 @@ class ProjectComponents extends ActiveRecord
     /**
      * Gets query for [[Component]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getComponent()
     {
@@ -73,7 +74,7 @@ class ProjectComponents extends ActiveRecord
     /**
      * Gets query for [[Project]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getProject()
     {
