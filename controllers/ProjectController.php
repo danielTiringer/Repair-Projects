@@ -7,6 +7,7 @@ use app\models\Project;
 use app\models\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
@@ -20,6 +21,17 @@ class ProjectController extends Controller
     public function behaviors()
     {
         return [
+            [
+                'class' => AccessControl::class,
+                'only' => ['create', 'update', 'delete', 'view', 'index'],
+                'rules' => [
+                    [
+                        'actions' => ['create', 'update', 'delete', 'view', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
