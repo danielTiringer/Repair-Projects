@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\models\Source;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ComponentSearch */
@@ -31,7 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'model',
             'type',
             'code',
-            //'description:ntext',
+            'description:ntext',
+            [
+                'class' => 'yii\grid\DataColumn',
+                'attribute' => 'source',
+                'format' => 'text',
+                'filter' => (new Source())->getDescriptions(),
+                'label' => Yii::t('app', 'Source'),
+                'value' => function($model) {
+                    return $model->source0->source_description;
+                }
+            ],
             //'created_by',
             //'created_at',
             //'updated_by',

@@ -27,6 +27,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'description') ?>
 
+    <?php // echo $form->field($model, 'source') ?>
+
     <?php // echo $form->field($model, 'created_by') ?>
 
     <?php // echo $form->field($model, 'created_at') ?>

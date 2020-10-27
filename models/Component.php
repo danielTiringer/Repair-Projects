@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "component".
@@ -14,16 +13,19 @@ use yii\db\ActiveRecord;
  * @property string $type
  * @property string|null $code
  * @property string|null $description
+ * @property int|null $source
  * @property int|null $created_by
  * @property string $created_at
  * @property int|null $updated_by
  * @property string|null $updated_at
  *
  * @property User $createdBy
+ * @property Component $source0
+ * @property Component[] $components
  * @property User $updatedBy
  * @property ProjectComponents[] $projectComponents
  */
-class Component extends ActiveRecord
+class Component extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -41,11 +43,12 @@ class Component extends ActiveRecord
         return [
             [['make', 'model', 'type'], 'required'],
             [['description'], 'string'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['source', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['make', 'type', 'code'], 'string', 'max' => 50],
             [['model'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
+            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Component::className(), 'targetAttribute' => ['source' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
@@ -62,6 +65,7 @@ class Component extends ActiveRecord
             'type' => Yii::t('app', 'Type'),
             'code' => Yii::t('app', 'Code'),
             'description' => Yii::t('app', 'Description'),
+            'source' => Yii::t('app', 'Source'),
             'created_by' => Yii::t('app', 'Created By'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),
@@ -77,6 +81,26 @@ class Component extends ActiveRecord
     public function getCreatedBy()
     {
         return $this->hasOne(User::className(), ['id' => 'created_by']);
+    }
+
+    /**
+     * Gets query for [[Source0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSource0()
+    {
+        return $this->hasOne(Component::className(), ['id' => 'source']);
+    }
+
+    /**
+     * Gets query for [[Components]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComponents()
+    {
+        return $this->hasMany(Component::className(), ['source' => 'id']);
     }
 
     /**
@@ -99,4 +123,3 @@ class Component extends ActiveRecord
         return $this->hasMany(ProjectComponents::className(), ['component_id' => 'id']);
     }
 }
-

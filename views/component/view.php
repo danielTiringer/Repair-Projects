@@ -35,10 +35,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'type',
             'code',
             'description:ntext',
-            'created_by',
-            'created_at',
-            'updated_by',
-            'updated_at',
+            [
+                'attribute' => 'source',
+                'value' => $model->source0->source_description,
+            ],
+            [
+                'attribute' => 'created_by',
+                'value' => $model->createdBy->username,
+            ],
+            'created_at:datetime',
+            [
+                'attribute' => 'updated_by',
+                'value' => $model->createdBy->username,
+            ],
+            'updated_at:datetime',
         ],
     ]) ?>
 

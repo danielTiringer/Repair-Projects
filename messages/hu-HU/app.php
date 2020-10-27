@@ -36,6 +36,8 @@ return [
     'Search' => 'Keresés',
     'Create Project' => 'Projekt létrehozása',
     'Update Project: {name}' => 'Projekt frissítése: {name}',
+    'Create Component' => 'Alkatrészek létrehozása',
+    'Update Component: {name}' => 'Alkatrészek frissítése: {name}',
     'Update' => 'Frissítés',
     'Reset' => 'Újrakezdés',
     'Save' => 'Mentés',
@@ -50,4 +52,5 @@ return [
     'Updated By' => 'Frissítő',
     'Updated At' => 'Frissítés dátuma',
     'Are you sure you want to delete this item?' => 'Biztosan törli ezt az elemet?',
+    'Type' => 'Típus',
 ];

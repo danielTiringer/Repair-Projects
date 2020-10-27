@@ -17,7 +17,7 @@ class ComponentSearch extends Component
     public function rules()
     {
         return [
-            [['id', 'created_by', 'updated_by'], 'integer'],
+            [['id', 'source', 'created_by', 'updated_by'], 'integer'],
             [['make', 'model', 'type', 'code', 'description', 'created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class ComponentSearch extends Component
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'source' => $this->source,
             'created_by' => $this->created_by,
             'created_at' => $this->created_at,
             'updated_by' => $this->updated_by,
