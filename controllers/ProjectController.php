@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\models\Image;
 use app\models\Project;
 use app\models\ProjectSearch;
 use yii\web\Controller;
@@ -77,6 +78,7 @@ class ProjectController extends Controller
     public function actionCreate()
     {
         $model = new Project();
+        $image = new Image();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -84,6 +86,7 @@ class ProjectController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'image' => $image,
         ]);
     }
 

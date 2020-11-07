@@ -25,6 +25,7 @@ use yii\db\ActiveRecord;
  * @property int|null $updated_by
  * @property int|null $updated_at
  *
+ * @property Image[] $images
  * @property User $createdBy
  * @property Source $source0
  * @property Status $status0
@@ -107,6 +108,16 @@ class Project extends ActiveRecord
     public function getStatus0()
     {
     return $this->hasOne(Status::className(), ['id' => 'status']);
+    }
+
+    /**
+     * Gets query for [[Images]].
+     *
+     * @return ActiveQuery
+     */
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['project_id' => 'id']);
     }
 
     /**

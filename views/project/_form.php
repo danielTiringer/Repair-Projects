@@ -11,7 +11,7 @@ use app\models\Source;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'make')->textInput(['maxlength' => true]) ?>
 
@@ -26,6 +26,8 @@ use app\models\Source;
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'source')->dropDownList((new Source())->getDescriptions()) ?>
+
+    <?= $form->field($model->images, 'file')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
