@@ -18,6 +18,9 @@ Thumbs.db
 # composer vendor dir
 /vendor
 
+# uploads directory
+uploads/
+
 # docker temp files
 .composer-docker/
 
