@@ -31,7 +31,7 @@ class m201027_162921_create_image_table extends Migration
                 'id' => $this->primaryKey()->unsigned(),
                 self::LINKED_COLUMNS[0]['name'] => $this->integer(11)->unsigned(),
                 self::LINKED_COLUMNS[1]['name'] => $this->integer(11)->unsigned(),
-                'url' => $this->string(255)->notNull(),
+                'file' => $this->string(255)->notNull(),
                 'created_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             ]
         );
