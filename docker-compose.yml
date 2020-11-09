@@ -55,12 +55,14 @@ services:
     restart: always
     depends_on:
       - mysql
+      - test-mysql
     environment:
-      PMA_HOST: mysql
+      PMA_HOSTS: mysql,test-mysql
     ports:
       - '8884:80'
     links:
       - mysql
+      - test-mysql
     networks:
       - yii2
 
