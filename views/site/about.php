@@ -9,8 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-		<?= Yii::t('app', 'We repair laptops and mobile phones for the pleasure of tinkering.') ?>
+        <?= Yii::t('app', 'We repair laptops and mobile phones for the pleasure of tinkering.') ?>
     </p>
 </div>
