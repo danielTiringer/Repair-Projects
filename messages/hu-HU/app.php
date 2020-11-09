@@ -18,6 +18,7 @@ return [
     'Body cannot be blank.' => 'Törzs nem lehet üres.',
     'Verification Code' => 'Ellenőrző kód',
     'The verification code is incorrect.' => 'A megerősítő kód helytelen.',
+    'Password cannot be blank.' => 'Jelszó nem lehet üres.',
     'Submit' => 'Elküldés',
     'Auth Key' => 'Hitelesítési kulcs',
     'Access Token' => 'Hozzáférési token',

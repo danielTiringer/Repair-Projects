@@ -18,7 +18,7 @@ class LoginFormCest
     {
         $I->amLoggedInAs(100);
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see(Yii::t('app', 'Logout') . ' (admin)');
     }
 
     // demonstrates `amLoggedInAs` method
@@ -26,34 +26,34 @@ class LoginFormCest
     {
         $I->amLoggedInAs(\app\models\User::findByUsername('admin'));
         $I->amOnPage('/');
-        $I->see('Logout (admin)');
+        $I->see(Yii::t('app', 'Logout') . ' (admin)');
     }
 
     public function loginWithEmptyCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', []);
         $I->expectTo('see validations errors');
-        $I->see('Username cannot be blank.');
-        $I->see('Password cannot be blank.');
+        $I->see(Yii::t('app', 'Email cannot be blank.'));
+        $I->see(Yii::t('app', 'Password cannot be blank.'));
     }
 
     public function loginWithWrongCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'admin',
+            'LoginForm[email]' => 'admin@example.com',
             'LoginForm[password]' => 'wrong',
         ]);
         $I->expectTo('see validations errors');
-        $I->see('Incorrect username or password.');
+        $I->see('Incorrect email or password.');
     }
 
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', [
-            'LoginForm[username]' => 'admin',
-            'LoginForm[password]' => 'admin',
+            'LoginForm[email]' => 'admin@example.com',
+            'LoginForm[password]' => 'password',
         ]);
-        $I->see('Logout (admin)');
+        $I->see(Yii::t('app', 'Logout') . ' (admin)');
         $I->dontSeeElement('form#login-form');              
     }
 }
