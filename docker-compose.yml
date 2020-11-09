@@ -30,6 +30,25 @@ services:
     networks:
       - yii2
 
+  test-mysql:
+    image: mysql:8.0
+    container_name: repair-test-db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    environment:
+      MYSQL_DATABASE: repair-test-db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - repair-test-db-data:/var/lib/mysql
+    networks:
+      - yii2
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.0
     container_name: repair-devel-admin
@@ -47,6 +66,7 @@ services:
 
 volumes:
   repair-devel-db-data:
+  repair-test-db-data:
 
 networks:
   yii2:
