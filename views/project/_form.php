@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Image;
 use app\models\Source;
 
 /* @var $this yii\web\View */
@@ -26,8 +27,6 @@ use app\models\Source;
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'source')->dropDownList((new Source())->getDescriptions()) ?>
-
-    <?= $form->field($model->images, 'file')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
