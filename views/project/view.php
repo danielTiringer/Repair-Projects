@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a(Yii::t('app', 'Upload Images'), ['images', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -59,5 +60,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <div>
+        <?php foreach ($model->images as $image) { ?>
+            <?= Html::img(Yii::getAlias('@projectImages') . '/' . $image->file, ['width' => '100', 'height' => '100']) ?>
+        <?php } ?>
+    </div>
 </div>
-
