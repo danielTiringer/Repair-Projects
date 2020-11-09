@@ -12,8 +12,32 @@ return [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'language' => 'en-US',
+    'language' => 'hu-HU',
+    'sourceLanguage' => 'en-US',
+    'bootstrap' => ['languagepicker'],
     'components' => [
+        'languagepicker' => [
+            'class' => 'lajax\languagepicker\Component',
+            'languages' => [
+                'en-US' => 'English',
+                'hu-HU' => 'Magyar'
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                    'on missingTranslation' => [
+                        'app\components\TranslationEventHandler',
+                        'handleMissingTranslation',
+                    ],
+                ],
+            ],
+        ],
         'db' => $db,
         'mailer' => [
             'useFileTransport' => true,

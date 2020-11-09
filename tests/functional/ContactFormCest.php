@@ -9,19 +9,19 @@ class ContactFormCest
 
     public function openContactPage(\FunctionalTester $I)
     {
-        $I->see('Contact', 'h1');        
+        $I->see(Yii::t('app', 'Contact'), 'h1');
     }
 
     public function submitEmptyForm(\FunctionalTester $I)
     {
         $I->submitForm('#contact-form', []);
         $I->expectTo('see validations errors');
-        $I->see('Contact', 'h1');
-        $I->see('Name cannot be blank');
-        $I->see('Email cannot be blank');
-        $I->see('Subject cannot be blank');
-        $I->see('Body cannot be blank');
-        $I->see('The verification code is incorrect');
+        $I->see(Yii::t('app', 'Contact'), 'h1');
+        $I->see(Yii::t('app', 'Contact cannot be blank.'));
+        $I->see(Yii::t('app', 'Email cannot be blank.'));
+        $I->see(Yii::t('app', 'Subject cannot be blank.'));
+        $I->see(Yii::t('app', 'Body cannot be blank.'));
+        $I->see(Yii::t('app', 'The verification code is incorrect.'));
     }
 
     public function submitFormWithIncorrectEmail(\FunctionalTester $I)
@@ -35,7 +35,7 @@ class ContactFormCest
         ]);
         $I->expectTo('see that email address is wrong');
         $I->dontSee('Name cannot be blank', '.help-inline');
-        $I->see('Email is not a valid email address.');
+        $I->see(Yii::t('app', 'Email is not a valid email address.'));
         $I->dontSee('Subject cannot be blank', '.help-inline');
         $I->dontSee('Body cannot be blank', '.help-inline');
         $I->dontSee('The verification code is incorrect', '.help-inline');        
