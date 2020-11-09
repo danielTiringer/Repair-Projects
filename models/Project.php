@@ -83,6 +83,7 @@ class Project extends ActiveRecord
             'price' => Yii::t('app', 'Price'),
             'source' => Yii::t('app', 'Source'),
             'status' => Yii::t('app', 'Status'),
+            'images' => Yii::t('app', 'Images'),
             'created_by' => Yii::t('app', 'Created By'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_by' => Yii::t('app', 'Updated By'),

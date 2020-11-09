@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "image".
@@ -10,16 +12,14 @@ use Yii;
  * @property int $id
  * @property int|null $project_id
  * @property int|null $component_id
- * @property string $url
+ * @property string $file
  * @property string $created_at
  *
  * @property Component $component
  * @property Project $project
  */
-class Image extends \yii\db\ActiveRecord
+class Image extends ActiveRecord
 {
-    public $file;
-
     /**
      * {@inheritdoc}
      */
@@ -35,10 +35,9 @@ class Image extends \yii\db\ActiveRecord
     {
         return [
             [['project_id', 'component_id'], 'integer'],
-            [['url'], 'required'],
-            [['file'], 'file'],
+            [['file'], 'file', 'extensions' => 'jpg, gif, jpeg, png', 'maxFiles' => 5, 'skipOnEmpty' => 'false'],
+            [['file'], 'required'],
             [['created_at'], 'safe'],
-            [['url'], 'string', 'max' => 255],
             [['component_id'], 'exist', 'skipOnError' => true, 'targetClass' => Component::className(), 'targetAttribute' => ['component_id' => 'id']],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
         ];
@@ -53,7 +52,7 @@ class Image extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'project_id' => Yii::t('app', 'Project ID'),
             'component_id' => Yii::t('app', 'Component ID'),
-            'url' => Yii::t('app', 'Url'),
+            'file' => Yii::t('app', 'Images'),
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }
@@ -61,7 +60,7 @@ class Image extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Component]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getComponent()
     {
@@ -71,7 +70,7 @@ class Image extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Project]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getProject()
     {
