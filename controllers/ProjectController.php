@@ -3,13 +3,15 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use app\models\Image;
 use app\models\Project;
 use app\models\ProjectSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -122,6 +124,45 @@ class ProjectController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Renders image upload form.
+     * If the image upload is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionImages($id)
+    {
+        $model = $this->findModel($id);
+        $upload = new Image();
+
+        if ($upload->load(Yii::$app->request->post())) {
+            $upload->file = UploadedFile::getInstances($upload, 'file');
+
+            if ($upload->file && $upload->validate()) {
+                if (!file_exists(Url::to('@projectImages'))) {
+                    mkdir(Url::to('@projectImages'), 0755, true);
+                }
+
+                foreach ($upload->file as $file) {
+                    $image = new Image();
+                    $image->project_id = $id;
+                    $image->file = $file->baseName . '_' . time() . '.' . $file->extension;
+
+                    if ($image->save()) {
+                        $file->saveAs(Url::to('@projectImages') . $image->file);
+                    }
+                }
+            }
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('images', [
+            'model' => $model,
+            'upload' => $upload,
+        ]);
     }
 
     /**
