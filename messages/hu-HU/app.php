@@ -53,4 +53,8 @@ return [
     'Updated At' => 'Frissítés dátuma',
     'Are you sure you want to delete this item?' => 'Biztosan törli ezt az elemet?',
     'Type' => 'Típus',
+    'Image' => 'Kép',
+    'Images' => 'Képek',
+    'Upload Images' => 'Képek feltöltése',
+    'Upload' => 'Feltöltés',
 ];
