@@ -12,7 +12,12 @@ use app\models\Source;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(
+        [
+            'id' => 'project-form',
+            'options' => ['enctype' => 'multipart/form-data'],
+        ]
+    ); ?>
 
     <?= $form->field($model, 'make')->textInput(['maxlength' => true]) ?>
 
