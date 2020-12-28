@@ -1,6 +1,5 @@
 <?php
 
-use Yii;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use app\models\Source;

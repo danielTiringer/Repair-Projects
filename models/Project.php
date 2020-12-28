@@ -61,10 +61,10 @@ class Project extends ActiveRecord
             [['description'], 'string'],
             [['make', 'code'], 'string', 'max' => 50],
             [['model'], 'string', 'max' => 255],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Source::className(), 'targetAttribute' => ['source' => 'id']],
-            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Source::class, 'targetAttribute' => ['source' => 'id']],
+            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::class, 'targetAttribute' => ['status' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -98,7 +98,7 @@ class Project extends ActiveRecord
     */
    public function getSource0()
    {
-       return $this->hasOne(Source::className(), ['id' => 'source']);
+       return $this->hasOne(Source::class, ['id' => 'source']);
    }
 
     /**
@@ -108,7 +108,7 @@ class Project extends ActiveRecord
     */
     public function getStatus0()
     {
-    return $this->hasOne(Status::className(), ['id' => 'status']);
+    return $this->hasOne(Status::class, ['id' => 'status']);
     }
 
     /**
@@ -118,7 +118,7 @@ class Project extends ActiveRecord
      */
     public function getImages()
     {
-        return $this->hasMany(Image::className(), ['project_id' => 'id']);
+        return $this->hasMany(Image::class, ['project_id' => 'id']);
     }
 
     /**
@@ -128,7 +128,7 @@ class Project extends ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
@@ -138,7 +138,7 @@ class Project extends ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
     /**
@@ -148,6 +148,6 @@ class Project extends ActiveRecord
      */
     public function getProjectComponents()
     {
-        return $this->hasMany(ProjectComponents::className(), ['project_id' => 'id']);
+        return $this->hasMany(ProjectComponents::class, ['project_id' => 'id']);
     }
 }

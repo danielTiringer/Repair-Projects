@@ -52,7 +52,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.0
     container_name: repair-devel-admin
-    restart: always
+    restart: unless-stopped
     depends_on:
       - mysql
       - test-mysql
