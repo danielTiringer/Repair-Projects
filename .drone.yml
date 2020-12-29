@@ -8,7 +8,7 @@ steps:
   - composer install
 
 - name: copy paste detection
-  image: rvannauker/phpcpd
+  image: phpqa/phpcpd
   commands:
   - phpcpd /drone/src
 
