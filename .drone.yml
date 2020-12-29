@@ -7,11 +7,6 @@ steps:
   commands:
   - composer install
 
-- name: copy paste detection
-  image: phpqa/phpcpd
-  commands:
-  - phpcpd /drone/src
-
 - name: test
   image: php:7.4
   commands:
