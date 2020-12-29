@@ -15,14 +15,14 @@ class ProjectViewCest
             'projects' => [
                 'class' => ProjectFixture::class,
                 'dataFile' => codecept_data_dir() . 'project.php',
-            ]
+            ],
         ];
     }
 
     public function _before(\FunctionalTester $I)
     {
         $I->amLoggedInAs(\app\models\User::findByUsername('demo'));
-        $I->amOnPage(['project/create']);
+        $I->amOnPage(['project/view?id=1']);
     }
 
     public function cannotOpenProjectViewBeforeLogin(\FunctionalTester $I)
@@ -62,5 +62,18 @@ class ProjectViewCest
         $I->see(Yii::t('app', 'Created At'), 'th');
         $I->see(Yii::t('app', 'Updated By'), 'th');
         $I->see(Yii::t('app', 'Updated At'), 'th');
+    }
+
+    public function navigateToUpdateProjectForm(\FunctionalTester $I)
+    {
+        $I->click(Yii::t('app', 'Update'));
+        $I->seeCurrentUrlEquals('/index-test.php/project/update?id=1');
+        $I->see(Yii::t('app', 'Update Project') . ': 1', 'h1');
+    }
+
+    public function deleteProject(\FunctionalTester $I)
+    {
+        $I->click(Yii::t('app', 'Delete'));
+        $I->seeCurrentUrlEquals('/index-test.php/project/delete?id=1');
     }
 }

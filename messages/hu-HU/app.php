@@ -46,6 +46,7 @@ return [
     'Price cannot be blank.' => 'Ár nem lehet üres.',
     'Search' => 'Keresés',
     'Create Project' => 'Projekt létrehozása',
+    'Update Project' => 'Projekt frissítése',
     'Update Project: {name}' => 'Projekt frissítése: {name}',
     'Create Component' => 'Alkatrészek létrehozása',
     'Update Component: {name}' => 'Alkatrészek frissítése: {name}',

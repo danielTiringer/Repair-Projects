@@ -1,5 +1,6 @@
 <?php 
 
+use app\tests\fixtures\ProjectFixture;
 use app\tests\fixtures\UserFixture;
 
 class ProjectCreateCest
@@ -9,7 +10,11 @@ class ProjectCreateCest
         return [
             'profiles' => [
                 'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'dataFile' => codecept_data_dir() . 'user.php',
+            ],
+            'projects' => [
+                'class' => ProjectFixture::class,
+                'dataFile' => codecept_data_dir() . 'project.php',
             ],
         ];
     }
@@ -60,6 +65,6 @@ class ProjectCreateCest
         $I->dontSeeElement('form#project-form');
         $I->seeRecord('app\models\Project', ['make' => 'Test Make', 'model' => 'Test Model']);
         $I->seeResponseCodeIs(\Codeception\Util\HttpCode::OK);
-        $I->amOnPage('view?id=22');
+        $I->seeCurrentUrlEquals('/index-test.php/project/view?id=2');
     }
 }
