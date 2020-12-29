@@ -2,17 +2,18 @@
 
 class ContactFormCest 
 {
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->amOnPage(['site/contact']);
     }
 
-    public function openContactPage(\FunctionalTester $I)
+    public function openContactPage(FunctionalTester $I)
     {
+        $I->seeInTitle(Yii::t('app', 'Contact'));
         $I->see(Yii::t('app', 'Contact'), 'h1');
     }
 
-    public function submitEmptyForm(\FunctionalTester $I)
+    public function submitEmptyForm(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', []);
         $I->expectTo('see validations errors');
@@ -24,7 +25,7 @@ class ContactFormCest
         $I->see(Yii::t('app', 'The verification code is incorrect.'));
     }
 
-    public function submitFormWithIncorrectEmail(\FunctionalTester $I)
+    public function submitFormWithIncorrectEmail(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [
             'ContactForm[name]' => 'tester',
@@ -41,7 +42,7 @@ class ContactFormCest
         $I->dontSee('The verification code is incorrect', '.help-inline');        
     }
 
-    public function submitFormSuccessfully(\FunctionalTester $I)
+    public function submitFormSuccessfully(FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [
             'ContactForm[name]' => 'tester',

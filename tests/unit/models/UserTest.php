@@ -4,8 +4,9 @@ namespace tests\unit\models;
 
 use app\models\User;
 use app\tests\fixtures\UserFixture;
+use Codeception\Test\Unit;
 
-class UserTest extends \Codeception\Test\Unit
+class UserTest extends Unit
 {
     public function _fixtures()
     {

@@ -27,6 +27,7 @@ class ProjectCreateCest
 
     public function openProjectCreatePage(\FunctionalTester $I)
     {
+        $I->seeInTitle(Yii::t('app', 'Create Project'));
         $I->see(Yii::t('app', 'Create Project'), 'h1');
         $I->see(Yii::t('app', 'Make'), 'label');
         $I->see(Yii::t('app', 'Model'), 'label');

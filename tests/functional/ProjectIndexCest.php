@@ -14,21 +14,22 @@ class ProjectIndexCest
         ];
     }
 
-    public function _before(\FunctionalTester $I)
+    public function _before(FunctionalTester $I)
     {
         $I->amLoggedInAs(\app\models\User::findByUsername('demo'));
         $I->amOnPage(['project']);
     }
 
-    public function cannotOpenProjectPageBeforeLogin(\FunctionalTester $I)
+    public function cannotOpenProjectPageBeforeLogin(FunctionalTester $I)
     {
         Yii::$app->user->logout();
         $I->amOnPage(['project']);
         $I->see(Yii::t('app', 'Login'), 'h1');
     }
 
-    public function openProjectPage(\FunctionalTester $I)
+    public function openProjectPage(FunctionalTester $I)
     {
+        $I->seeInTitle(Yii::t('app', 'Projects'));
         $I->see(Yii::t('app', 'Projects'), 'h1');
         $I->see(Yii::t('app', 'Create Project'), 'a');
         $I->see(Yii::t('app', 'Make'), 'a');
@@ -39,7 +40,7 @@ class ProjectIndexCest
         $I->see(Yii::t('app', 'Status'), 'a');
     }
 
-    public function navigateToNewProjectForm(\FunctionalTester $I)
+    public function navigateToNewProjectForm(FunctionalTester $I)
     {
         $I->click(Yii::t('app', 'Create Project'));
         $I->see(Yii::t('app', 'Create Project'), 'h1');
