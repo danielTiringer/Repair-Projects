@@ -47,9 +47,9 @@ class Component extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['make', 'type', 'code'], 'string', 'max' => 50],
             [['model'], 'string', 'max' => 255],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
-            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Component::className(), 'targetAttribute' => ['source' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['source'], 'exist', 'skipOnError' => true, 'targetClass' => Component::class, 'targetAttribute' => ['source' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -80,7 +80,7 @@ class Component extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'created_by']);
+        return $this->hasOne(User::class, ['id' => 'created_by']);
     }
 
     /**
@@ -90,7 +90,7 @@ class Component extends \yii\db\ActiveRecord
      */
     public function getSource0()
     {
-        return $this->hasOne(Component::className(), ['id' => 'source']);
+        return $this->hasOne(Component::class, ['id' => 'source']);
     }
 
     /**
@@ -100,7 +100,7 @@ class Component extends \yii\db\ActiveRecord
      */
     public function getComponents()
     {
-        return $this->hasMany(Component::className(), ['source' => 'id']);
+        return $this->hasMany(Component::class, ['source' => 'id']);
     }
 
     /**
@@ -110,7 +110,7 @@ class Component extends \yii\db\ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::className(), ['id' => 'updated_by']);
+        return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
     /**
@@ -120,6 +120,6 @@ class Component extends \yii\db\ActiveRecord
      */
     public function getProjectComponents()
     {
-        return $this->hasMany(ProjectComponents::className(), ['component_id' => 'id']);
+        return $this->hasMany(ProjectComponents::class, ['component_id' => 'id']);
     }
 }

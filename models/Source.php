@@ -67,7 +67,7 @@ class Source extends ActiveRecord
      */
     public function getProjects()
     {
-        return $this->hasMany(Project::className(), ['source' => 'id']);
+        return $this->hasMany(Project::class, ['source' => 'id']);
     }
 }
 

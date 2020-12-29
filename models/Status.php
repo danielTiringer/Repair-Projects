@@ -72,7 +72,7 @@ class Status extends ActiveRecord
      */
     public function getProjects()
     {
-        return $this->hasMany(Project::className(), ['status' => 'id']);
+        return $this->hasMany(Project::class, ['status' => 'id']);
     }
 }
 

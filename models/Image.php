@@ -38,8 +38,8 @@ class Image extends ActiveRecord
             [['file'], 'file', 'extensions' => 'jpg, gif, jpeg, png', 'maxFiles' => 5, 'skipOnEmpty' => 'false'],
             [['file'], 'required'],
             [['created_at'], 'safe'],
-            [['component_id'], 'exist', 'skipOnError' => true, 'targetClass' => Component::className(), 'targetAttribute' => ['component_id' => 'id']],
-            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::className(), 'targetAttribute' => ['project_id' => 'id']],
+            [['component_id'], 'exist', 'skipOnError' => true, 'targetClass' => Component::class, 'targetAttribute' => ['component_id' => 'id']],
+            [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::class, 'targetAttribute' => ['project_id' => 'id']],
         ];
     }
 
@@ -64,7 +64,7 @@ class Image extends ActiveRecord
      */
     public function getComponent()
     {
-        return $this->hasOne(Component::className(), ['id' => 'component_id']);
+        return $this->hasOne(Component::class, ['id' => 'component_id']);
     }
 
     /**
@@ -74,6 +74,6 @@ class Image extends ActiveRecord
      */
     public function getProject()
     {
-        return $this->hasOne(Project::className(), ['id' => 'project_id']);
+        return $this->hasOne(Project::class, ['id' => 'project_id']);
     }
 }

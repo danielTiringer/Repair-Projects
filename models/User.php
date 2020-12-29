@@ -138,7 +138,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getComponents()
     {
-        return $this->hasMany(Component::className(), ['created_by' => 'id']);
+        return $this->hasMany(Component::class, ['created_by' => 'id']);
     }
 
     /**
@@ -148,7 +148,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getComponents0()
     {
-        return $this->hasMany(Component::className(), ['updated_by' => 'id']);
+        return $this->hasMany(Component::class, ['updated_by' => 'id']);
     }
 
     /**
@@ -158,7 +158,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getProjects()
     {
-        return $this->hasMany(Project::className(), ['created_by' => 'id']);
+        return $this->hasMany(Project::class, ['created_by' => 'id']);
     }
 
     /**
@@ -168,6 +168,6 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getProjects0()
     {
-        return $this->hasMany(Project::className(), ['updated_by' => 'id']);
+        return $this->hasMany(Project::class, ['updated_by' => 'id']);
     }
 }
