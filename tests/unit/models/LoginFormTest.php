@@ -3,12 +3,23 @@
 namespace tests\unit\models;
 
 use app\models\LoginForm;
+use app\tests\fixtures\UserFixture;
 use Codeception\Test\Unit;
 use Yii;
 
 class LoginFormTest extends Unit
 {
     private $model;
+
+    public function _fixtures()
+    {
+        return [
+            'profiles' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+        ];
+    }
 
     protected function _after()
     {

@@ -1,7 +1,19 @@
 <?php
 
+use app\tests\fixtures\UserFixture;
+
 class ProjectIndexCest
 {
+    public function _fixtures()
+    {
+        return [
+            'profiles' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+        ];
+    }
+
     public function _before(\FunctionalTester $I)
     {
         $I->amLoggedInAs(\app\models\User::findByUsername('demo'));

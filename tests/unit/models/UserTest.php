@@ -3,9 +3,20 @@
 namespace tests\unit\models;
 
 use app\models\User;
+use app\tests\fixtures\UserFixture;
 
 class UserTest extends \Codeception\Test\Unit
 {
+    public function _fixtures()
+    {
+        return [
+            'profiles' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+        ];
+    }
+
     public function testFindUserById()
     {
         expect_that($user = User::findIdentity(100));
