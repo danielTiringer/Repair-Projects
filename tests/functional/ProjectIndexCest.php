@@ -1,5 +1,6 @@
 <?php
 
+use app\tests\fixtures\ProjectFixture;
 use app\tests\fixtures\UserFixture;
 
 class ProjectIndexCest
@@ -10,6 +11,10 @@ class ProjectIndexCest
             'profiles' => [
                 'class' => UserFixture::class,
                 'dataFile' => codecept_data_dir() . 'user.php'
+            ],
+            'projects' => [
+                'class' => ProjectFixture::class,
+                'dataFile' => codecept_data_dir() . 'project.php',
             ],
         ];
     }
@@ -30,19 +35,27 @@ class ProjectIndexCest
     public function openProjectPage(FunctionalTester $I)
     {
         $I->seeInTitle(Yii::t('app', 'Projects'));
+        $I->seeLink(Yii::t('app', 'Create Project'), '/create');
         $I->see(Yii::t('app', 'Projects'), 'h1');
-        $I->see(Yii::t('app', 'Create Project'), 'a');
-        $I->see(Yii::t('app', 'Make'), 'a');
-        $I->see(Yii::t('app', 'Model'), 'a');
-        $I->see(Yii::t('app', 'Description'), 'a');
-        $I->see(Yii::t('app', 'Year'), 'a');
-        $I->see(Yii::t('app', 'Source'), 'a');
-        $I->see(Yii::t('app', 'Status'), 'a');
+        $I->seeNumberOfElements('tr', 3);
+        $I->seeLink(Yii::t('app', 'Make'));
+        $I->seeLink(Yii::t('app', 'Model'));
+        $I->seeLink(Yii::t('app', 'Description'));
+        $I->seeLink(Yii::t('app', 'Year'));
+        $I->seeLink(Yii::t('app', 'Source'));
+        $I->seeLink(Yii::t('app', 'Status'));
+        $I->see('1', 'td');
+        $I->see('Test_Make', 'td');
+        $I->see('Test_Model', 'td');
+        $I->see('Test_Description', 'td');
+        $I->see('2020', 'td');
+        $I->see('Ebay', 'td');
+        $I->see('In Progress', 'td');
     }
 
     public function navigateToNewProjectForm(FunctionalTester $I)
     {
         $I->click(Yii::t('app', 'Create Project'));
-        $I->see(Yii::t('app', 'Create Project'), 'h1');
+        $I->seeCurrentUrlEquals('/index-test.php/project/create');
     }
 }
